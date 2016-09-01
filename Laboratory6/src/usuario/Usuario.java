@@ -5,9 +5,10 @@ import java.util.Iterator;
 import java.util.Set;
 
 import excecoes.StringInvalidaException;
+import jogo.Jogabilidade;
 import jogo.Jogo;
 
-public abstract class Usuario {
+public class Usuario {
 
 	public static final String FIM_DE_LINHA = System.lineSeparator();
 
@@ -32,7 +33,7 @@ public abstract class Usuario {
 		this.credito = 0;
 	}
 
-	public abstract void compraJogo(Jogo jogo) throws Exception;
+	//public abstract void compraJogo(Jogo jogo) throws Exception;
 
 	public void setXp2(int novoValor) {
 		this.xp2 = novoValor;
@@ -77,7 +78,51 @@ public abstract class Usuario {
 		}
 		setXp2(getXp2() + jogo.registraJogada(score, venceu));
 	}
+	//public abstract void recompensar(String nomeJogo,int scoreObtido,boolean zerou) throws Exception;
+	//public abstract void punir(String nomeJogo,int scoreObtido,boolean zerou) throws Exception;
+	
+/*	public void recompensar(String nomeJogo,int scoreObtido,boolean zerou) throws Exception{
+		Jogo jogo = this.buscaJogo(nomeJogo);
+		if(jogo == null){
+			throw new Exception();
+		}
+		Set<Jogabilidade> jogabilidades = jogo.getJogabilidade();
+		int recompensa = 0;
+		for (Jogabilidade jogabilidade : jogabilidades) {
+			if(jogabilidade.equals("OFFLINE")){
+				recompensa += 30;
+			}
+			if(jogabilidade.equals("MULTIPLAYER")){
+				recompensa += 10;
+			}
+		}
+		
+		setXp2(recompensa + getXp2() + jogo.registraJogada(scoreObtido, zerou));
+	}
+	
+	public void punir(String nomeJogo, int scoreObtido, boolean zerou) throws Exception{
+		Jogo jogo = this.buscaJogo(nomeJogo);
+		if(jogo == null){
+			throw new Exception();
+		}
+		Set<Jogabilidade> jogabilidades = jogo.getJogabilidade();
+		int punicao = 0;
+		for (Jogabilidade jogabilidade : jogabilidades) {
+			if(jogabilidade.equals("ONLINE")){
+				punicao -= 10;
+			}
+			else if(jogabilidade.equals("COMPETITIVO")){
+				punicao -= 20;
+			}
+			else if(jogabilidade.equals("COOPERATIVO")){
+				punicao -= 50;
+			}
+		}
+		
+		setXp2(punicao + getXp2() + jogo.registraJogada(scoreObtido, zerou));
 
+	}
+	*/
 	public Jogo buscaJogo(String nomeJogo) {
 		Jogo buscado = null;
 		Iterator itr = meusJogos.iterator();
